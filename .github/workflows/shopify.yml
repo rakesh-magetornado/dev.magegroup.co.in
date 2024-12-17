@@ -56,17 +56,17 @@ jobs:
 
       - name: Backup Current Theme
         env:
-          SHOPIFY_STORE_URL: ${{ https://dev-magegroup-co-in.myshopify.com/ }}
-          SHOPIFY_PASSWORD: ${{ sahgle }}
-          BACKUP_THEME_ID: ${{ 174228144427 }}
+          SHOPIFY_STORE_URL: ${{ 'https://dev-magegroup-co-in.myshopify.com/' }}
+          SHOPIFY_PASSWORD: ${{ 'sahgle' }}
+          BACKUP_THEME_ID: ${{ '174228144427' }}
         run: |
           shopify theme pull --store $SHOPIFY_STORE_URL --password $SHOPIFY_PASSWORD --theme-id $BACKUP_THEME_ID --directory backup
 
       - name: Deploy New Code
         env:
-          SHOPIFY_STORE_URL: ${{ https://dev-magegroup-co-in.myshopify.com/ }}
-          SHOPIFY_PASSWORD: ${{ sahgle }}
-          SHOPIFY_THEME_ID: ${{ 174228144427 }}
+          SHOPIFY_STORE_URL: ${{ 'https://dev-magegroup-co-in.myshopify.com/' }}
+          SHOPIFY_PASSWORD: ${{ 'sahgle' }}
+          SHOPIFY_THEME_ID: ${{ '174228144427' }}
         run: |
           shopify theme push --store $SHOPIFY_STORE_URL --password $SHOPIFY_PASSWORD --theme-id $SHOPIFY_THEME_ID
 
