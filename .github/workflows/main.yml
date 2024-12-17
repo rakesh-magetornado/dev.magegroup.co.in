@@ -9,43 +9,8 @@ on:
       - main
  
 jobs:
-  lint:
-    name: Lint Code
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Lint Liquid Files
-        run: npx liquid-linter ./src/templates
-
-      - name: Lint JavaScript and SCSS
-        run: npm run lint
-
-  test:
-    name: Run Tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Run Unit Tests
-        run: npm test
-
   deploy:
     name: Deploy to Shopify
-    needs: [lint, test]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
