@@ -22,10 +22,11 @@ jobs:
       - name: Backup Current Theme
         env:
           SHOPIFY_STORE_URL: ${{ secrets.SHOPIFY_STORE_URL }}
+          SHOPIFY_STORE_NAME: ${{ secrets.SHOPIFY_STORE_NAME }}
           SHOPIFY_PASSWORD: ${{ secrets.SHOPIFY_PASSWORD }}
           BACKUP_THEME_ID: ${{ secrets.SHOPIFY_THEME_ID }}
         run: |
-          shopify theme pull --store $SHOPIFY_STORE_URL --password $SHOPIFY_PASSWORD --theme $BACKUP_THEME_ID --path backup
+          shopify theme pull --store $SHOPIFY_STORE_NAME --password $SHOPIFY_PASSWORD --theme $BACKUP_THEME_ID --path backup
 
       - name: Deploy New Code
         env:
