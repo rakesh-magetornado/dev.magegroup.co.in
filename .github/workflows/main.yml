@@ -47,6 +47,6 @@ jobs:
         env:
           SHOPIFY_STORE_URL: ${{ secrets.SHOPIFY_STORE_URL }}
           SHOPIFY_PASSWORD: ${{ secrets.SHOPIFY_PASSWORD }}
-          BACKUP_THEME_ID: ${{ secrets.BACKUP_THEME_ID }}
+          BACKUP_THEME_ID: ${{ secrets.SHOPIFY_THEME_ID }}
         run: |
           shopify theme push --store $SHOPIFY_STORE_URL --password $SHOPIFY_PASSWORD --theme-id $BACKUP_THEME_ID
