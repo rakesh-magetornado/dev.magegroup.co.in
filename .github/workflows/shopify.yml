@@ -56,22 +56,22 @@ jobs:
 
       - name: Backup Current Theme
         env:
-          SHOPIFY_STORE_URL: ${{ 'https://dev-magegroup-co-in.myshopify.com/' }}
-          SHOPIFY_PASSWORD: ${{ 'sahgle' }}
-          BACKUP_THEME_ID: ${{ '174228144427' }}
+          SHOPIFY_STORE_URL: ${{ secrets.SHOPIFY_STORE_URL }}
+          SHOPIFY_PASSWORD: ${{ secrets.SHOPIFY_PASSWORD }}
+          BACKUP_THEME_ID: ${{ secrets.SHOPIFY_THEME_ID }}
         run: |
           shopify theme pull --store $SHOPIFY_STORE_URL --password $SHOPIFY_PASSWORD --theme-id $BACKUP_THEME_ID --directory backup
 
       - name: Deploy New Code
         env:
-          SHOPIFY_STORE_URL: ${{ 'https://dev-magegroup-co-in.myshopify.com/' }}
-          SHOPIFY_PASSWORD: ${{ 'sahgle' }}
-          SHOPIFY_THEME_ID: ${{ '174228144427' }}
+          SHOPIFY_STORE_URL: ${{ secrets.SHOPIFY_STORE_URL }}
+          SHOPIFY_PASSWORD: ${{ secrets.SHOPIFY_PASSWORD }}
+          SHOPIFY_THEME_ID: ${{ secrets.SHOPIFY_THEME_ID }}
         run: |
           shopify theme push --store $SHOPIFY_STORE_URL --password $SHOPIFY_PASSWORD --theme-id $SHOPIFY_THEME_ID
 
       - name: Verify Deployment
-        run: curl -s -o /dev/null -w "%{http_code}" https://${{ https://dev-magegroup-co-in.myshopify.com/ }} | grep "200"
+        run: curl -s -o /dev/null -w "%{http_code}" https://${{ secrets.SHOPIFY_STORE_URL }} | grep "200"
 
   rollback:
     name: Rollback to Backup
@@ -80,8 +80,8 @@ jobs:
     steps:
       - name: Deploy Backup Theme
         env:
-          SHOPIFY_STORE_URL: ${{ https://dev-magegroup-co-in.myshopify.com/ }}
-          SHOPIFY_PASSWORD: ${{ sahgle }}
-          BACKUP_THEME_ID: ${{ 174228144427 }}
+          SHOPIFY_STORE_URL: ${{ secrets.SHOPIFY_STORE_URL }}
+          SHOPIFY_PASSWORD: ${{ secrets.SHOPIFY_PASSWORD }}
+          BACKUP_THEME_ID: ${{ secrets.BACKUP_THEME_ID }}
         run: |
           shopify theme push --store $SHOPIFY_STORE_URL --password $SHOPIFY_PASSWORD --theme-id $BACKUP_THEME_ID
